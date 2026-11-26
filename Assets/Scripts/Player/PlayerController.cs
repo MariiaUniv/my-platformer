@@ -15,6 +15,17 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
 
+    [Header("Стрибок")]
+    [SerializeField, Range(0.5f, 8f)] private float jumpHeight = 3f;
+
+    // Базовий масштаб гравітації. На кроці 8 ми будемо його множити,
+    // але розрахунок висоти МУСИТЬ спиратися саме на це число
+    [SerializeField, Range(0.5f, 8f)] private float baseGravity = 3f;
+
+    private float JumpVelocity =>
+        Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * baseGravity * jumpHeight);
+
+
     private Rigidbody2D body;
     private PlayerControls controls;
     private float moveInput;
@@ -33,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         isGrounded = CheckGround();
+        if (controls.Player.Jump.WasPressedThisFrame() && isGrounded) Jump();
         // Введення читають у Update: FixedUpdate може пропустити короткий натиск
         moveInput = controls.Player.Move.ReadValue<Vector2>().x;
     }
@@ -58,6 +70,13 @@ public class PlayerController : MonoBehaviour
         if (groundCheck == null) return;
         Gizmos.color = Application.isPlaying && isGrounded ? Color.green : Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    private void Jump()
+    {
+        // Фіксуємо масштаб ДО імпульсу: інакше злетимо з чужою гравітацією
+        body.gravityScale = baseGravity;
+        body.linearVelocity = new Vector2(body.linearVelocity.x, JumpVelocity);
     }
 
 }
