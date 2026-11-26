@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(1f, 6f)] private float fallMultiplier = 2.2f;
     [SerializeField, Range(1f, 8f)] private float lowJumpMultiplier = 3.5f;
 
+    [SerializeField] private CameraShake cameraShake;
+
 
     private float JumpVelocity =>
         Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * baseGravity * jumpHeight);
@@ -40,6 +42,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    [Header("Зворотний звʼязок")]
+    [SerializeField, Range(1f, 20f)] private float hardLandingSpeed = 9f;
+    [SerializeField, Range(0.05f, 0.3f)] private float shakeDuration = 0.12f;
+    [SerializeField, Range(0.02f, 0.3f)] private float shakeStrength = 0.12f;
+
+    private bool wasGrounded;
+    private float fallSpeed;     // найбільша швидкість падіння перед дотиком
 
 
 
@@ -51,7 +60,12 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         controls = new PlayerControls();
+
+        // Префаб не може зберігати посилання на обʼєкт сцени — шукаємо самі.
+        // Лишіть рядок ТІЛЬКИ для того варіанта, який робите
+        if (cameraShake == null) cameraShake = FindAnyObjectByType<CameraShake>();  // А
     }
+
 
     // Без Enable введення не приходить — і помилки при цьому не буде
     private void OnEnable() => controls.Player.Enable();
@@ -81,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
         moveInput = controls.Player.Move.ReadValue<Vector2>().x;
         UpdateVisuals();   // зʼявиться на кроці 9
+        CheckLanding();
     }
 
 
@@ -135,5 +150,25 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = moveInput < 0f;
     }
 
+    private void CheckLanding()
+    {
+        // Поки летимо вниз — памʼятаємо, наскільки швидко
+        if (!isGrounded)
+            fallSpeed = Mathf.Max(fallSpeed, -body.linearVelocity.y);
+
+        if (isGrounded && !wasGrounded)   // ← саме ПЕРЕХІД, а не стан
+            OnLanded(fallSpeed);
+
+        if (isGrounded) fallSpeed = 0f;
+        wasGrounded = isGrounded;
+    }
+
+    private void OnLanded(float speed)
+    {
+        // ТІЛЬКИ жорстке приземлення. Легкий зскок зі сходинки ефекту не дає
+        if (speed < hardLandingSpeed) return;
+        cameraShake.Shake(shakeDuration, shakeStrength);   // ← весь варіант А
+        // ↓ сюди додасться ОДИН рядок із обраного варіанта — А або Б
+    }
 
 }
