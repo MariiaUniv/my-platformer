@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private float JumpVelocity =>
         Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * baseGravity * jumpHeight);
 
+    [Header("Прийоми тюнінгу")]
+    [SerializeField, Range(0f, 0.4f)] private float coyoteTime = 0.12f;
+    private float coyoteCounter;
 
     private Rigidbody2D body;
     private PlayerControls controls;
@@ -44,6 +47,18 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         isGrounded = CheckGround();
+        // Поповнюємо таймер ТІЛЬКИ коли персонаж справді стоїть, а не летить угору.
+        // Без цієї умови буде подвійний стрибок — пояснення нижче
+        bool canRefill = isGrounded && body.linearVelocity.y <= 0.01f;
+
+        coyoteCounter = canRefill ? coyoteTime : coyoteCounter - Time.deltaTime;
+
+        if (controls.Player.Jump.WasPressedThisFrame() && coyoteCounter > 0f)
+        {
+            Jump();
+            coyoteCounter = 0f;   // обнулення теж обов'язкове
+        }
+
         if (controls.Player.Jump.WasPressedThisFrame() && isGrounded) Jump();
         // Введення читають у Update: FixedUpdate може пропустити короткий натиск
         moveInput = controls.Player.Move.ReadValue<Vector2>().x;
