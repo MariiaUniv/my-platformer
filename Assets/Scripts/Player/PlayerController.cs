@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     // Базовий масштаб гравітації. На кроці 8 ми будемо його множити,
     // але розрахунок висоти МУСИТЬ спиратися саме на це число
     [SerializeField, Range(0.5f, 8f)] private float baseGravity = 3f;
+    [SerializeField, Range(1f, 6f)] private float fallMultiplier = 2.2f;
+    [SerializeField, Range(1f, 8f)] private float lowJumpMultiplier = 3.5f;
+
 
     private float JumpVelocity =>
         Mathf.Sqrt(2f * Mathf.Abs(Physics2D.gravity.y) * baseGravity * jumpHeight);
@@ -84,6 +87,17 @@ public class PlayerController : MonoBehaviour
         float x = Mathf.MoveTowards(body.linearVelocity.x, target,
                                     rate * Time.fixedDeltaTime);
         body.linearVelocity = new Vector2(x, body.linearVelocity.y);
+        if (body.linearVelocity.y < 0f)
+            // Падає — тягнемо вниз сильніше. Прибирає «зависання» у верхній точці
+            body.gravityScale = baseGravity * fallMultiplier;
+
+        else if (body.linearVelocity.y > 0f && !controls.Player.Jump.IsPressed())
+            // Летить угору, але клавішу вже відпущено — обрізаємо стрибок гравітацією
+            body.gravityScale = baseGravity * lowJumpMultiplier;
+
+        else
+            body.gravityScale = baseGravity;
+
     }
     // Коло перекриває всю ширину ніг, а не одну точку
     private bool CheckGround() =>
