@@ -35,6 +35,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 0.4f)] private float jumpBufferTime = 0.15f;
     private float jumpBufferCounter;
 
+    [Header("Вигляд")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+
+
 
     private Rigidbody2D body;
     private PlayerControls controls;
@@ -73,8 +80,9 @@ public class PlayerController : MonoBehaviour
         }
 
         moveInput = controls.Player.Move.ReadValue<Vector2>().x;
-        //UpdateVisuals();   // зʼявиться на кроці 9
+        UpdateVisuals();   // зʼявиться на кроці 9
     }
+
 
 
     private void FixedUpdate()
@@ -117,5 +125,15 @@ public class PlayerController : MonoBehaviour
         body.gravityScale = baseGravity;
         body.linearVelocity = new Vector2(body.linearVelocity.x, JumpVelocity);
     }
+    private void UpdateVisuals()
+    {
+        // Джерело істини — фактична швидкість тіла, а не натиснута клавіша
+        animator.SetFloat(SpeedHash, Mathf.Abs(body.linearVelocity.x));
+
+        // flipX, а НЕ мінусовий масштаб: інакше дочірній GroundCheck переїде
+        if (Mathf.Abs(moveInput) > 0.01f)
+            spriteRenderer.flipX = moveInput < 0f;
+    }
+
 
 }
