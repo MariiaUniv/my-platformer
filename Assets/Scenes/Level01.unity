@@ -1580,8 +1580,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.684053
-    height: 1.1758941
+    width: 0.33333334
+    height: 0.44444445
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -2895,7 +2895,7 @@ Transform:
   m_GameObject: {fileID: 1018674489}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 4.5, z: 0}
+  m_LocalPosition: {x: -9, y: -4.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3050,6 +3050,11 @@ MonoBehaviour:
   maxSpeed: 8
   acceleration: 70
   deceleration: 90
+  groundCheck: {fileID: 1526128688}
+  groundCheckRadius: 0.15
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1039984874
 GameObject:
   m_ObjectHideFlags: 0
