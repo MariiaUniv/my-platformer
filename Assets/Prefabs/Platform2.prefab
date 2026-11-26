@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3462964586099905970}
   - component: {fileID: 5039843628406245539}
   - component: {fileID: 3259945754664809716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7929952469237215712}
   - component: {fileID: 504495560113874055}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1533330359965075621}
   - component: {fileID: 5599663668984576052}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

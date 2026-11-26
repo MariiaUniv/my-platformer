@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2168176667288302800}
   - component: {fileID: 7976938461076469179}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 68691115164591662}
   - component: {fileID: 6068111177787609150}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1307864060318317930}
   - component: {fileID: 6758407839376085772}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9036119869195108775}
   - component: {fileID: 7619710373761596455}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7104985997566709011}
   - component: {fileID: 7647454581916336320}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 983262366348862219}
   - component: {fileID: 1584923707854956735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 8917995051498022957}
   - component: {fileID: 5154992689584626624}
   - component: {fileID: 1253340312700906014}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3367593068426415269}
   - component: {fileID: 7730383163886364636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8585115568118942112}
   - component: {fileID: 2960834054213358634}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick_Oneway_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
