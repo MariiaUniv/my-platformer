@@ -26,7 +26,7 @@ public class CameraShake : MonoBehaviour
             transform.localPosition = basePosition +
                 (Vector3)(Random.insideUnitCircle * strength * damper);
 
-            elapsed += Time.unscaledDeltaTime;   // працює при timeScale = 0
+            elapsed += Time.unscaledDeltaTime;   // працює при timeS    cale = 0
             yield return null;
         }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Cinemachine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(1f, 6f)] private float fallMultiplier = 2.2f;
     [SerializeField, Range(1f, 8f)] private float lowJumpMultiplier = 3.5f;
 
-    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+    [SerializeField, Range(0.05f, 1f)] private float impulseForce = 0.3f;
 
 
     private float JumpVelocity =>
@@ -44,8 +46,7 @@ public class PlayerController : MonoBehaviour
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
     [Header("Зворотний звʼязок")]
     [SerializeField, Range(1f, 20f)] private float hardLandingSpeed = 9f;
-    [SerializeField, Range(0.05f, 0.3f)] private float shakeDuration = 0.12f;
-    [SerializeField, Range(0.02f, 0.3f)] private float shakeStrength = 0.12f;
+
 
     private bool wasGrounded;
     private float fallSpeed;     // найбільша швидкість падіння перед дотиком
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
         // Префаб не може зберігати посилання на обʼєкт сцени — шукаємо самі.
         // Лишіть рядок ТІЛЬКИ для того варіанта, який робите
-        if (cameraShake == null) cameraShake = FindAnyObjectByType<CameraShake>();  // А
+        if (impulseSource == null) impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
 
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour
     {
         // ТІЛЬКИ жорстке приземлення. Легкий зскок зі сходинки ефекту не дає
         if (speed < hardLandingSpeed) return;
-        cameraShake.Shake(shakeDuration, shakeStrength);   // ← весь варіант А
+        impulseSource.GenerateImpulseWithForce(impulseForce);
         // ↓ сюди додасться ОДИН рядок із обраного варіанта — А або Б
     }
     private void UpdateFootsteps()
