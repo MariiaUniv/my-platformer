@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip[] footsteps;   // щонайменше ТРИ кліпи
     [SerializeField, Range(0f, 0.3f)] private float pitchVariance = 0.12f;
 
+    [Header("Взаємодія")]
+    [SerializeField] private Transform interactPoint;
+    [SerializeField, Range(0.2f, 1.5f)] private float interactRadius = 0.6f;
+    [SerializeField] private LayerMask interactableLayer;
+
     private void PlayFootstep()
     {
         if (footsteps.Length == 0) return;
@@ -116,6 +121,8 @@ public class PlayerController : MonoBehaviour
         }
 
         moveInput = controls.Player.Move.ReadValue<Vector2>().x;
+        if (controls.Player.Interact.WasPressedThisFrame())
+            TryInteract();
         UpdateVisuals();   // зʼявиться на кроці 9
         CheckLanding();
         UpdateFootsteps();
@@ -208,5 +215,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void TryInteract()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(
+            interactPoint.position, interactRadius, interactableLayer);
+
+        if (hit != null && hit.TryGetComponent(out IInteractable target))
+            target.Interact();
+    }
 
 }
