@@ -1,6 +1,6 @@
 using System.Xml;
 using UnityEngine;
-
+using UnityEngine.Pool;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
@@ -19,6 +19,10 @@ public class EnemyController : MonoBehaviour
 
     [Header("Звук")]
     [SerializeField] private AudioSource audioSource;
+
+    [Header("Стрільба")]
+    [SerializeField] private Projectile projectilePrefab;
+    private ObjectPool<Projectile> pool;
 
     public EnemyStatsSO Stats => stats;
     public Rigidbody2D Body { get; private set; }
@@ -57,8 +61,17 @@ public class EnemyController : MonoBehaviour
         HurtState = new HurtState(this);
         DeadState = new DeadState(this);
 
-        AttackState = new MeleeAttackState(this);   // на кроці 13 тут
-                                                    // з'явиться вибір
+        AttackState = stats.ranged
+              ? (IState)new RangedAttackState(this)
+              : new MeleeAttackState(this);
+
+        pool = new ObjectPool<Projectile>(
+    createFunc: () => Instantiate(projectilePrefab),
+    actionOnGet: p => p.gameObject.SetActive(true),
+    actionOnRelease: p => p.gameObject.SetActive(false),
+    actionOnDestroy: p => Destroy(p.gameObject),
+    defaultCapacity: 20);
+
     }
 
     private void Start() => Machine.ChangeState(PatrolState);
@@ -147,6 +160,22 @@ public class EnemyController : MonoBehaviour
         
         if (hit != null && hit.TryGetComponent(out IDamageable target))
         target.TakeDamage(stats.damage, transform.position);
+    }
+
+
+    public void Shoot()
+    {
+        Projectile p = pool.Get();
+        // Стан скидаємо ЯВНО: перевикористаний снаряд пам'ятає старий
+        p.transform.position = attackPoint.position;
+        p.OnFinished = Release;
+        p.Launch(new Vector2(Facing, 0f), stats.damage);
+    }
+
+    private void Release(Projectile p)
+    {
+        p.OnFinished = null;
+        pool.Release(p);
     }
 
     // Щоб бачити радіуси й датчики у вікні Scene

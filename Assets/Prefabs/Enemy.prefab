@@ -319,6 +319,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   audioSource: {fileID: 9098421336164061208}
+  projectilePrefab: {fileID: 8640369555377120277, guid: 0b5cb298bf620804d82bd8d7a70ecfd9, type: 3}
 --- !u!114 &4958033866798620028
 MonoBehaviour:
   m_ObjectHideFlags: 0
