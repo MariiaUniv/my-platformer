@@ -28,7 +28,7 @@ public class EnemyStatsSO : ScriptableObject
     [Header("Бій")]
     [Range(1, 200)] public int maxHealth = 30;
     [Range(1, 50)] public int damage = 10;
-    [Range(0.1f, 2f)] public float telegraphTime = 0.45f;
+    [Range(0.05f, 2f)] public float telegraphTime = 0.45f;
     [Range(0.1f, 2f)] public float recoveryTime = 0.35f;
     [Range(0.1f, 2f)] public float hurtTime = 0.3f;
 

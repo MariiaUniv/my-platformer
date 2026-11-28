@@ -127,12 +127,12 @@ TextureImporter:
       name: Dead_Violet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 15
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1
+        y: 16
+        width: 14
+        height: 12
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: Dead_Violet_1
       rect:
         serializedVersion: 2
-        x: 15
-        y: 15
-        width: 65
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 16
+        y: 16
+        width: 64
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: Dead_Violet_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 16
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 12
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,12 +193,12 @@ TextureImporter:
       name: Dead_Violet_3
       rect:
         serializedVersion: 2
-        x: 15
+        x: 16
         y: 0
-        width: 65
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,7 +215,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7bf3600107863b641a09bf47edb958e7
     internalID: 0
     vertices: []
     indices: 
@@ -223,7 +223,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Dead_Violet_0: 545304787428370989
       Dead_Violet_1: 3000992998664704921

@@ -39,9 +39,13 @@ public class ChaseState : IState
         // Впритул не підбігаємо: інакше ворог проскакує гравця,
         // розвертається, проскакує знову — і тремтить на місці.
         // У стіну теж не впираємось: там ми однаково не пройдемо,
-        // але розвертатися НЕ можна — ціль саме в тому боці
+        // але розвертатися НЕ можна — ціль саме в тому боці.
+        // З обриву теж не стрибаємо: за краєм може бути лава чи яма,
+        // тому на краю платформи ворог зупиняється й чекає
+        bool atLedge = ctx.IsGrounded && ctx.AtEdge();
         bool canAdvance = ctx.DistanceToTarget > ctx.Stats.stopDistance
-                          && !ctx.AtWall();
+                          && !ctx.AtWall()
+                          && !atLedge;
 
         if (canAdvance) ctx.Move(ctx.Stats.chaseSpeed);
         else ctx.Stop();
