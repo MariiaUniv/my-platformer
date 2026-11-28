@@ -44,10 +44,10 @@ public class EnemyController : MonoBehaviour
         // гравця шукаємо в коді. Та сама пастка, що з камерою на Л3
         Target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // ↓ РОЗКОМЕНТУВАТИ НА КРОЦІ 10, коли з'явиться клас Health
-        // GetComponent<Health>().Configure(stats.maxHealth);
+        
+        GetComponent<Health>().Configure(stats.maxHealth);
 
-        // Вигляд теж приходить з ассета — тому другий тип ворога
+        //Вигляд теж приходить з ассета — тому другий тип ворога
         // не потребує ні нових спрайтів, ні нових анімацій
         GetComponentInChildren<SpriteRenderer>().color = stats.tint;
         ApplyScale();
