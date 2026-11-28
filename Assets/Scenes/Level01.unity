@@ -10451,8 +10451,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.9996071
-    height: 0.9995793
+    width: 0.502947
+    height: 0.80774087
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -10482,7 +10482,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1504974, y: 2, z: -10}
+  m_LocalPosition: {x: -6.4333344, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12289,6 +12289,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &871480483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871480484}
+  m_Layer: 9
+  m_Name: StompPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871480484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871480483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046, y: -0.057, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1018674490}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884468996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6348212966423314995, guid: c8ffd9fcc08c670418678f0e9ece4004, type: 3}
@@ -12618,6 +12649,7 @@ GameObject:
   - component: {fileID: 1018674497}
   - component: {fileID: 1018674498}
   - component: {fileID: 1018674499}
+  - component: {fileID: 1018674500}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -12640,6 +12672,7 @@ Transform:
   m_Children:
   - {fileID: 1526128688}
   - {fileID: 1041046625}
+  - {fileID: 871480484}
   m_Father: {fileID: 601138477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1018674491
@@ -13019,6 +13052,25 @@ MonoBehaviour:
   invulnerableTime: 0.6
   knockbackForce: 8
   respawn: {fileID: 1018674497}
+--- !u!114 &1018674500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018674489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd66475d6468194aabfbb5832409674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStomp
+  stompPoint: {fileID: 871480484}
+  radius: 0.3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  damage: 10
+  bounceForce: 9
 --- !u!1 &1039984874
 GameObject:
   m_ObjectHideFlags: 0
