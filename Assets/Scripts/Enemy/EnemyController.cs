@@ -141,12 +141,12 @@ public class EnemyController : MonoBehaviour
     // Тіло з'явиться на кроці 10, коли буде інтерфейс IDamageable
     public void DealDamage()
     {
-        // ↓ РОЗКОМЕНТУВАТИ НА КРОЦІ 10
-        // Collider2D hit = Physics2D.OverlapCircle(
-        //     attackPoint.position, stats.attackRadius, damageableLayers);
-        //
-        // if (hit != null && hit.TryGetComponent(out IDamageable target))
-        //     target.TakeDamage(stats.damage, transform.position);
+        
+        Collider2D hit = Physics2D.OverlapCircle(
+        attackPoint.position, stats.attackRadius, damageableLayers);
+        
+        if (hit != null && hit.TryGetComponent(out IDamageable target))
+        target.TakeDamage(stats.damage, transform.position);
     }
 
     // Щоб бачити радіуси й датчики у вікні Scene
